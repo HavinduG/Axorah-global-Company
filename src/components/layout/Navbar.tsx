@@ -1,0 +1,112 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AcfNavBarItem } from '@/lib/types';
+import { Button } from '@/components/ui/button';
+
+interface NavbarProps {
+    navItems: AcfNavBarItem[];
+    logo?: boolean; // In case we want to show a logo image
+}
+
+export function Navbar({ navItems }: NavbarProps) {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
+    return (
+        <nav
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+                    ? 'bg-black/80 backdrop-blur-md shadow-lg py-4'
+                    : 'bg-transparent py-6'
+                }`}
+        >
+            <div className="container mx-auto px-6 flex items-center justify-between">
+                {/* Logo / Brand */}
+                <Link href="/" className="text-white text-2xl font-bold tracking-tighter">
+                    Axorah
+                </Link>
+
+                {/* Desktop Menu */}
+                <div className="hidden md:flex items-center space-x-8">
+                    {navItems.map((item, index) => (
+                        <Link
+                            key={index}
+                            href={item.page_link || `/${item.menu_page_name.toLowerCase()}`}
+                            className="text-white/80 hover:text-white transition-colors text-sm font-medium"
+                        >
+                            {item.menu_page_name}
+                        </Link>
+                    ))}
+                </div>
+
+                {/* Right Side Actions */}
+                <div className="hidden md:flex items-center space-x-6">
+                    <Link href="#" className="text-white hover:text-white/80 text-sm font-medium">
+                        Sign up
+                    </Link>
+                    <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6 font-medium">
+                        Start
+                    </Button>
+                </div>
+
+                {/* Mobile Menu Toggle */}
+                <button
+                    className="md:hidden text-white focus:outline-none"
+                    onClick={toggleMobileMenu}
+                >
+                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-lg border-t border-white/10 md:hidden flex flex-col p-6 space-y-4"
+                    >
+                        {navItems.map((item, index) => (
+                            <Link
+                                key={index}
+                                href={item.page_link || `/${item.menu_page_name.toLowerCase()}`}
+                                className="text-white/80 hover:text-white text-lg font-medium"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                {item.menu_page_name}
+                            </Link>
+                        ))}
+                        <div className="border-t border-white/10 pt-4 flex flex-col space-y-4">
+                            <Link
+                                href="#"
+                                className="text-white/80 hover:text-white text-lg font-medium"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Sign up
+                            </Link>
+                            <Button className="bg-white text-black hover:bg-white/90 rounded-full w-full font-medium">
+                                Start
+                            </Button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </nav>
+    );
+}
