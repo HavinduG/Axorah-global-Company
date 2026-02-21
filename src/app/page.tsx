@@ -3,6 +3,9 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Hero } from '@/components/home/Hero';
 import { TemplatesSection } from '@/components/home/TemplatesSection';
 import { InteractiveScrollLayout } from '@/components/home/InteractiveScrollLayout';
+import { AboutSection } from '@/components/home/AboutSection';
+import { WorkSection } from "@/components/home/WorkSection";
+import { FeedbackSection } from "@/components/home/FeedbackSection";
 
 export default async function Home() {
   const data = await getHomePageData();
@@ -38,6 +41,15 @@ export default async function Home() {
 
       {/* Interactive Scroll Section */}
       <InteractiveScrollLayout />
+
+      {/* About Section */}
+      <AboutSection />
+
+      {/* Work Section */}
+      <WorkSection />
+
+      {/* Feedback Section */}
+      <FeedbackSection />
     </main>
   );
 }

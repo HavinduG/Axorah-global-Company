@@ -64,33 +64,39 @@ export function TemplatesSection({ templates, customers }: TemplatesSectionProps
     }, [templates]);
 
     return (
-        <section ref={containerRef} className="relative z-10 w-full py-24 bg-black text-white">
+        <section ref={containerRef} className="relative z-10 w-full pt-24 pb-0 bg-black text-white">
             <div className="container mx-auto px-4 md:px-6 max-w-[1920px]">
 
                 {/* Templates Grid - 5 Column Masonry Layout */}
-                <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
-                    {validTemplates.map((item, index) => (
-                        <TemplateCard key={item.project_view.ID || index} item={item} index={index} />
-                    ))}
+                <div className="relative">
+                    <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4 pb-32">
+                        {validTemplates.map((item, index) => (
+                            <TemplateCard key={item.project_view.ID || index} item={item} index={index} />
+                        ))}
+                    </div>
+                    {/* Gradient Fade Overlay */}
+                    <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none" />
                 </div>
 
                 {/* Customer Section */}
                 {customers && customers.length > 0 && (
-                    <div className="mt-24 pb-12">
+                    <div className="relative z-20 -mt-12 pb-12">
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
                             className="flex flex-col items-center"
                         >
-                            <div className="flex w-full items-center justify-center flex-wrap gap-8 md:gap-16">
+                            <div className="flex w-full items-center justify-center flex-wrap gap-x-12 gap-y-8 px-4">
                                 {customers.map((customer, index) => (
                                     <motion.div
                                         key={index}
                                         initial={{ opacity: 0 }}
                                         whileInView={{ opacity: 1 }}
-                                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                                        className="text-xl md:text-2xl font-bold text-white tracking-tight hover:text-white/80 transition-colors duration-300 cursor-default select-none"
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5, delay: index * 0.05 }}
+                                        className="text-xl md:text-2xl font-bold text-gray-400 tracking-tight hover:text-white transition-colors duration-300 cursor-default select-none"
                                     >
                                         {customer.client_brand_name}
                                     </motion.div>

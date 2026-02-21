@@ -151,8 +151,19 @@ export const InteractiveScrollLayout = () => {
             variants={containerVariants}
             className="w-full bg-black text-white relative"
         >
+            {/* Animated Divider */}
+            <div className="px-6 lg:px-20">
+                <motion.div
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, ease: "circOut" }}
+                    className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left"
+                />
+            </div>
+
             {/* Section Header */}
-            <div className="px-6 lg:px-20 pt-24 pb-12">
+            <div className="px-6 lg:px-20 pt-12 pb-12">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
