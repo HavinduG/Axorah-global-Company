@@ -1,4 +1,4 @@
-import { getHomePageData } from '@/lib/api';
+import { getHomePageData, getProjects } from '@/lib/api';
 import { Navbar } from '@/components/layout/Navbar';
 import { Hero } from '@/components/home/Hero';
 import { TemplatesSection } from '@/components/home/TemplatesSection';
@@ -6,9 +6,11 @@ import { InteractiveScrollLayout } from '@/components/home/InteractiveScrollLayo
 import { AboutSection } from '@/components/home/AboutSection';
 import { WorkSection } from "@/components/home/WorkSection";
 import { FeedbackSection } from "@/components/home/FeedbackSection";
+import { ProjectsSection } from "@/components/home/ProjectsSection";
 
 export default async function Home() {
   const data = await getHomePageData();
+  const projects = await getProjects();
 
   // Loading state or error handling could be improved here
   if (!data) {
@@ -50,6 +52,11 @@ export default async function Home() {
 
       {/* Feedback Section */}
       <FeedbackSection />
+
+      {/* Projects Section */}
+      {projects && projects.length > 0 && (
+        <ProjectsSection projects={projects} />
+      )}
     </main>
   );
 }

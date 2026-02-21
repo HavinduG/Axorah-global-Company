@@ -81,7 +81,7 @@ export const WorkSection = () => {
             <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 
                 {/* Left Content: Description & Icon */}
-                <div className="order-2 lg:order-1 flex flex-col justify-center relative z-10">
+                <div className="flex flex-col justify-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ export const WorkSection = () => {
 
 
                 {/* Right Content: Video & Background */}
-                <div className="order-1 lg:order-2 relative h-[500px] lg:h-[600px] w-full flex items-center justify-center">
+                <div className="relative h-[500px] lg:h-[600px] w-full flex items-center justify-center">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentIndex}

@@ -91,3 +91,60 @@ export interface WordPressPage {
   };
   acf: AcfData;
 }
+
+// Project specific types
+export interface ProjectImageSize {
+  url: string;
+  width: number;
+  height: number;
+}
+
+export interface ProjectImageSizes {
+  thumbnail: string;
+  medium: string;
+  medium_large: string;
+  large: string;
+  "1536x1536": string;
+  "2048x2048": string;
+  [key: string]: string | number; // For other dynamic sizes like "thumbnail-width"
+}
+
+export interface ProjectImage {
+  ID: number;
+  id: number;
+  title: string;
+  filename: string;
+  filesize: number;
+  url: string;
+  link: string;
+  alt: string;
+  name: string;
+  width: number;
+  height: number;
+  sizes: ProjectImageSizes;
+}
+
+export interface ProjectAcf {
+  project_name: string;
+  project_image: ProjectImage;
+  project_gallery: ProjectImage[];
+  project_description: string;
+}
+
+export interface WordPressProject {
+  id: number;
+  date: string;
+  modified: string;
+  slug: string;
+  status: string;
+  type: string;
+  link: string;
+  title: {
+    rendered: string;
+  };
+  content: {
+    rendered: string;
+    protected: boolean;
+  };
+  acf: ProjectAcf;
+}

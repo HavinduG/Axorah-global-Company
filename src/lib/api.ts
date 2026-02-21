@@ -1,4 +1,4 @@
-import { WordPressPage } from './types';
+import { WordPressPage, WordPressProject } from './types';
 
 const WORDPRESS_API_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL;
 
@@ -32,6 +32,55 @@ export async function getHomePageData(): Promise<WordPressPage | null> {
         return pages[0]; // Return the first matching page
     } catch (error) {
         console.error('Error fetching home page data:', error);
+        return null;
+    }
+}
+
+export async function getProjects(): Promise<WordPressProject[]> {
+    if (!WORDPRESS_API_URL) {
+        console.error('NEXT_PUBLIC_WORDPRESS_URL is not defined');
+        return [];
+    }
+
+    try {
+        const res = await fetch(`${WORDPRESS_API_URL}wp-json/wp/v2/project?_embed&per_page=100`, {
+            next: { revalidate: 60 }
+        });
+
+        if (!res.ok) {
+            console.error('Failed to fetch projects');
+            return [];
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error('Error fetching projects:', error);
+        return [];
+    }
+}
+
+export async function getProjectBySlug(slug: string): Promise<WordPressProject | null> {
+    if (!WORDPRESS_API_URL) {
+        console.error('NEXT_PUBLIC_WORDPRESS_URL is not defined');
+        return null;
+    }
+
+    try {
+        const res = await fetch(`${WORDPRESS_API_URL}wp-json/wp/v2/project?slug=${slug}&_embed`, {
+            next: { revalidate: 60 }
+        });
+
+        if (!res.ok) {
+            console.error(`Failed to fetch project with slug ${slug}`);
+            return null;
+        }
+
+        const projects: WordPressProject[] = await res.json();
+        if (projects.length === 0) return null;
+
+        return projects[0];
+    } catch (error) {
+        console.error(`Error fetching project with slug ${slug}:`, error);
         return null;
     }
 }
