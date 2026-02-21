@@ -7,6 +7,7 @@ import { AboutSection } from '@/components/home/AboutSection';
 import { WorkSection } from "@/components/home/WorkSection";
 import { FeedbackSection } from "@/components/home/FeedbackSection";
 import { ProjectsSection } from "@/components/home/ProjectsSection";
+import { ShortSection } from "@/components/home/ShortSection";
 
 export default async function Home() {
   const data = await getHomePageData();
@@ -50,13 +51,16 @@ export default async function Home() {
       {/* Work Section */}
       <WorkSection />
 
-      {/* Feedback Section */}
-      <FeedbackSection />
-
       {/* Projects Section */}
       {projects && projects.length > 0 && (
         <ProjectsSection projects={projects} />
       )}
+
+      {/* Feedback Section */}
+      <FeedbackSection />
+
+      {/* Short CTA Section */}
+      <ShortSection />
     </main>
   );
 }
