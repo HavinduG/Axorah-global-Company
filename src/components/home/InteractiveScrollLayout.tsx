@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,6 +110,11 @@ const Scene = ({ activeIndex }: { activeIndex: number }) => {
 export const InteractiveScrollLayout = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+
+    const toggleExpanded = (id: string) => {
+        setExpandedSections(prev => ({ ...prev, [id]: !prev[id] }));
+    };
 
     // Initial Entry Animation
     const containerVariants = {
@@ -241,20 +247,37 @@ export const InteractiveScrollLayout = () => {
 
                                 {/* Full content */}
                                 <div className="prose prose-invert max-w-none text-gray-400 text-sm leading-relaxed">
-                                    {service.description_paragraphs.slice(0, 2).map((para, i) => ( // Show fewer paragraphs on mobile to save space? Keep detailed for now
-                                        <p key={i} className="mb-4">{para}</p>
-                                    ))}
-                                    {service.description_paragraphs.length > 2 && (
-                                        <p className="mb-4 hidden lg:block">{service.description_paragraphs[2]}</p>
+                                    <p className="mb-4">{service.description_paragraphs[0]}</p>
+
+                                    {expandedSections[service.id] && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: "auto" }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            {service.description_paragraphs.slice(1).map((para, i) => (
+                                                <p key={i} className="mb-4">{para}</p>
+                                            ))}
+                                        </motion.div>
                                     )}
                                 </div>
 
                                 <button
-                                    className="group w-fit flex items-center gap-2 px-6 py-3 mt-8 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all duration-300"
+                                    onClick={() => toggleExpanded(service.id)}
+                                    className="text-gray-400 hover:text-white text-sm font-medium underline underline-offset-4 mb-8 transition-colors"
                                 >
-                                    <span>Explore Service</span>
-                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    {expandedSections[service.id] ? "See less" : "See more"}
                                 </button>
+
+                                <Link href="/capabilities">
+                                    <button
+                                        className="group w-fit flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all duration-300"
+                                    >
+                                        <span>Explore Service</span>
+                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     ))}

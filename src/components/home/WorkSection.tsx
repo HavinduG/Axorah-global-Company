@@ -3,74 +3,32 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-// Data provided in the prompt
-const WORK_DATA = {
-    work_main_title: "What We’ve Built",
-    works_tabs: [
-        {
-            acf_fc_layout: "work_tab",
-            icon_image: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/target.svg",
-                alt: "target",
-            },
-            work_description:
-                "<p><strong>PulseShop UI/UX Design</strong><br />\nA high-converting e-commerce interface designed for a modern retail experience. This project focuses on a &#8220;mobile-first&#8221; approach, featuring a clean product grid, intuitive filtering systems, and a seamless one-page checkout process. The design uses vibrant accents to draw attention to call-to-action buttons, ensuring a fluid user journey from discovery to purchase.</p>",
-            background_image: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/309753.jpg",
-            },
-            project_short_video: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/Video_Preview_Link_Provided.mp4",
-            },
-        },
-        {
-            acf_fc_layout: "work_tab",
-            icon_image: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/wifi.svg",
-                alt: "wifi",
-            },
-            work_description:
-                "<p><strong>Nexus Corp Digital Presence</strong><br />\nA professional and authoritative corporate website layout tailored for B2B services. The design emphasizes trust and clarity, utilizing a structured layout to showcase company values, service offerings, and data-driven insights. It features a sophisticated color palette, bold typography, and professional imagery to establish a strong brand identity in a competitive market.</p>",
-            background_image: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/dark-theme-flex-background-in-ultra-hd-4k_EP7V.webp",
-            },
-            project_short_video: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/E_commerce_Website_Preview_Video.mp4",
-            },
-        },
-        {
-            acf_fc_layout: "work_tab",
-            icon_image: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/landmark.svg",
-                alt: "landmark",
-            },
-            work_description:
-                "<p><strong>Zenith Portfolio Concept</strong><br />\nA minimalist, content-focused portfolio designed for creative professionals. By removing human stock photography, the project highlights pure UI/UX craftsmanship through sophisticated typography, ample white space, and smooth micro-interactions. The layout features an interactive project gallery and a sleek dark-mode aesthetic, making the work the centerpiece of the user experience.</p>",
-            background_image: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/images.jpg",
-            },
-            project_short_video: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/Video_Preview_Link_Provided.mp4",
-            },
-        },
-    ],
-};
+import { AcfWorkTab } from "@/lib/types";
 
 const AUTO_SLIDE_INTERVAL = 6000; // 6 seconds
 
-export const WorkSection = () => {
+interface WorkSectionProps {
+    workMainTitle: string;
+    worksTabs: AcfWorkTab[];
+}
+
+export const WorkSection = ({ workMainTitle, worksTabs }: WorkSectionProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     // Auto-slide functionality
     useEffect(() => {
+        if (!worksTabs || worksTabs.length === 0) return;
+
         const timer = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % WORK_DATA.works_tabs.length);
+            setCurrentIndex((prev) => (prev + 1) % worksTabs.length);
         }, AUTO_SLIDE_INTERVAL);
 
         return () => clearInterval(timer);
-    }, []);
+    }, [worksTabs]);
 
-    const currentWork = WORK_DATA.works_tabs[currentIndex];
+    if (!worksTabs || worksTabs.length === 0) return null;
+
+    const currentWork = worksTabs[currentIndex];
 
     const handleDotClick = (index: number) => {
         setCurrentIndex(index);
@@ -89,7 +47,7 @@ export const WorkSection = () => {
                         className="mb-8"
                     >
                         <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">
-                            {WORK_DATA.work_main_title}
+                            {workMainTitle}
                         </h2>
                     </motion.div>
 
@@ -125,7 +83,7 @@ export const WorkSection = () => {
 
                     {/* Navigation Dots */}
                     <div className="flex gap-3 mt-8">
-                        {WORK_DATA.works_tabs.map((_, idx) => (
+                        {worksTabs.map((_, idx) => (
                             <button
                                 key={idx}
                                 onClick={() => handleDotClick(idx)}
@@ -143,44 +101,40 @@ export const WorkSection = () => {
                 </div>
 
 
-                {/* Right Content: Video & Background */}
+                {/* Right Content: Video Only */}
                 <div className="relative h-[500px] lg:h-[600px] w-full flex items-center justify-center">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={currentIndex}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 1.05 }}
-                            transition={{ duration: 0.7, ease: "easeOut" }}
-                            className="absolute inset-0 w-full h-full"
-                        >
-                            {/* Dynamic Background matching video/image */}
-                            <div
-                                className="absolute inset-0 rounded-3xl overflow-hidden opacity-50 blur-3xl transform scale-110"
-                                style={{
-                                    backgroundImage: `url(${currentWork.background_image.url})`,
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center',
+                    {worksTabs.map((work, idx) => {
+                        const isActive = currentIndex === idx;
+                        return (
+                            <motion.div
+                                key={`video-container-${idx}`}
+                                initial={false}
+                                animate={{
+                                    opacity: isActive ? 1 : 0,
+                                    scale: isActive ? 1 : 0.95,
+                                    zIndex: isActive ? 10 : 0
                                 }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-black/20 z-0" />
-
-                            {/* Main Card */}
-                            <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
-                                {/* Video */}
-                                <video
-                                    key={`video-${currentIndex}`} // Force re-render/play on change
-                                    className="w-full h-full object-cover"
-                                    src={currentWork.project_short_video.url}
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                />
-                                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
+                                transition={{ duration: 0.7, ease: "easeOut" }}
+                                className="absolute inset-0 w-full h-full"
+                                style={{ pointerEvents: isActive ? 'auto' : 'none' }}
+                            >
+                                {/* Main Card */}
+                                <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
+                                    {/* Video */}
+                                    <video
+                                        className="w-full h-full object-cover"
+                                        src={work.project_short_video.url}
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        preload="auto"
+                                    />
+                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
 
             </div>

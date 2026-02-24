@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AcfNavBarItem } from '@/lib/types';
@@ -13,6 +14,7 @@ interface NavbarProps {
 }
 
 export function Navbar({ navItems }: NavbarProps) {
+    const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -30,8 +32,8 @@ export function Navbar({ navItems }: NavbarProps) {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-black/80 backdrop-blur-md shadow-lg py-4'
-                    : 'bg-transparent py-6'
+                ? 'bg-black/80 backdrop-blur-md shadow-lg py-4'
+                : 'bg-transparent py-6'
                 }`}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
@@ -42,15 +44,22 @@ export function Navbar({ navItems }: NavbarProps) {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center space-x-8">
-                    {navItems.map((item, index) => (
-                        <Link
-                            key={index}
-                            href={item.page_link || `/${item.menu_page_name.toLowerCase()}`}
-                            className="text-white/80 hover:text-white transition-colors text-sm font-medium"
-                        >
-                            {item.menu_page_name}
-                        </Link>
-                    ))}
+                    {navItems.map((item, index) => {
+                        const isHome = item.menu_page_name.toLowerCase() === 'home';
+                        const href = item.page_link || (isHome ? '/' : `/${item.menu_page_name.toLowerCase()}`);
+                        const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
+
+                        return (
+                            <Link
+                                key={index}
+                                href={href}
+                                className={`relative text-sm font-medium transition-colors py-2 ${isActive ? 'text-white' : 'text-white/60 hover:text-white'
+                                    }`}
+                            >
+                                {item.menu_page_name}
+                            </Link>
+                        );
+                    })}
                 </div>
 
                 {/* Right Side Actions */}
@@ -82,16 +91,24 @@ export function Navbar({ navItems }: NavbarProps) {
                         transition={{ duration: 0.2 }}
                         className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-lg border-t border-white/10 md:hidden flex flex-col p-6 space-y-4"
                     >
-                        {navItems.map((item, index) => (
-                            <Link
-                                key={index}
-                                href={item.page_link || `/${item.menu_page_name.toLowerCase()}`}
-                                className="text-white/80 hover:text-white text-lg font-medium"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                {item.menu_page_name}
-                            </Link>
-                        ))}
+                        {navItems.map((item, index) => {
+                            const isHome = item.menu_page_name.toLowerCase() === 'home';
+                            const href = item.page_link || (isHome ? '/' : `/${item.menu_page_name.toLowerCase()}`);
+                            const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
+
+                            return (
+                                <Link
+                                    key={index}
+                                    href={href}
+                                    className={`text-lg font-medium transition-colors flex items-center gap-2 ${isActive ? 'text-white' : 'text-white/60 hover:text-white'
+                                        }`}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                    {isActive && <div className="w-1.5 h-1.5 rounded-full bg-white transition-opacity" />}
+                                    {item.menu_page_name}
+                                </Link>
+                            );
+                        })}
                         <div className="border-t border-white/10 pt-4 flex flex-col space-y-4">
                             <Link
                                 href="#"

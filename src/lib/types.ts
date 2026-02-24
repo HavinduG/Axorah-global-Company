@@ -68,6 +68,28 @@ export interface AcfCustomerItem {
   client_brand_name: string;
 }
 
+export interface AcfWorkTab {
+  acf_fc_layout: string;
+  icon_image: {
+    url: string;
+    alt: string;
+  };
+  work_description: string;
+  project_short_video: {
+    url: string;
+  };
+}
+
+export interface AcfAboutImageItem {
+  acf_fc_layout: string;
+  about_image: {
+    url: string;
+    mime_type: string;
+  };
+  image_title: string;
+  image_descripation: string;
+}
+
 export interface AcfData {
   header_logo: boolean;
   nav_bar: AcfNavBarItem[];
@@ -78,6 +100,14 @@ export interface AcfData {
   hero_section_: AcfHeroSectionItem[];
   project_templates: AcfProjectTemplateItem[];
   customers_: AcfCustomerItem[];
+  work_main_title: string;
+  works_tabs: AcfWorkTab[];
+  about_main_title: string;
+  about_section_title: string;
+  about_small_description: string;
+  button_about: string;
+  button_link_about: string;
+  about_small_images_: AcfAboutImageItem[];
 }
 
 export interface WordPressPage {

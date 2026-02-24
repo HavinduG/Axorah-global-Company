@@ -49,7 +49,10 @@ export default async function Home() {
       <AboutSection />
 
       {/* Work Section */}
-      <WorkSection />
+      <WorkSection
+        workMainTitle={acf.work_main_title}
+        worksTabs={acf.works_tabs}
+      />
 
       {/* Projects Section */}
       {projects && projects.length > 0 && (
