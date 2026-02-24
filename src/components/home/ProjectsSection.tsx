@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { WordPressProject } from "@/lib/types";
@@ -69,6 +70,16 @@ export const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
                         </div>
                     ))}
                 </div>
+            </div>
+
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mt-12 flex justify-start">
+                <Link
+                    href="/work"
+                    className="group flex items-center gap-3 text-white border-b border-white pb-1 w-fit hover:opacity-70 transition-opacity"
+                >
+                    <span className="text-lg">See all</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                </Link>
             </div>
 
             {/* Internal styling for marquee to ensure it works without custom tailwind config */}

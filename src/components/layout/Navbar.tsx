@@ -53,7 +53,7 @@ export function Navbar({ navItems }: NavbarProps) {
                             <Link
                                 key={index}
                                 href={href}
-                                className={`relative text-sm font-medium transition-colors py-2 ${isActive ? 'text-white' : 'text-white/60 hover:text-white'
+                                className={`relative text-[15px] font-medium transition-colors py-2 ${isActive ? 'text-white' : 'text-white/60 hover:text-white'
                                     }`}
                             >
                                 {item.menu_page_name}
@@ -64,10 +64,10 @@ export function Navbar({ navItems }: NavbarProps) {
 
                 {/* Right Side Actions */}
                 <div className="hidden md:flex items-center space-x-6">
-                    <Link href="#" className="text-white hover:text-white/80 text-sm font-medium">
+                    <Link href="#" className="text-white hover:text-white/80 text-[15px] font-medium">
                         Sign up
                     </Link>
-                    <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6 font-medium">
+                    <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6 text-[15px] font-medium">
                         Start
                     </Button>
                 </div>
