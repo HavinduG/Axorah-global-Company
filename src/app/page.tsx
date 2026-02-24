@@ -46,7 +46,14 @@ export default async function Home() {
       <InteractiveScrollLayout />
 
       {/* About Section */}
-      <AboutSection />
+      <AboutSection
+        aboutMainTitle={acf.about_main_title}
+        aboutSectionTitle={acf.about_section_title}
+        aboutSmallDescription={acf.about_small_description}
+        buttonAbout={acf.button_about}
+        buttonLinkAbout={acf.button_link_about}
+        aboutSmallImages={acf.about_small_images_}
+      />
 
       {/* Work Section */}
       <WorkSection

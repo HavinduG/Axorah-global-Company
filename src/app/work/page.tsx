@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { WorkSection } from "@/components/home/WorkSection";
 import Link from "next/link";
 import { WordPressProject } from "@/lib/types";
+import { WorkHero } from "@/components/work/WorkHero";
 
 // This will help stagger or animate items gracefully on scroll
 import { WorkGrid } from "@/components/work/WorkGrid";
@@ -34,8 +35,14 @@ export default async function WorkPage() {
             {/* Nav */}
             <Navbar navItems={acf.nav_bar} logo={acf.header_logo} />
 
+            {/* Work Hero Section */}
+            <WorkHero
+                title={acf.work_main_title || "Our Work"}
+                description="Explore our portfolio of cutting-edge creative and digital projects."
+            />
+
             {/* Main Premium Work Slider from Home Page */}
-            <div className="pt-20">
+            <div className="pt-10">
                 <WorkSection
                     workMainTitle={acf.work_main_title}
                     worksTabs={acf.works_tabs}
