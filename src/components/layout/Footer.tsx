@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Linkedin, MapPin, Mail, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, MapPin, Mail, Phone, ExternalLink } from "lucide-react";
+import { AcfData } from "@/lib/types";
 
 const contactDetails = [
     { title: "Address", text: "233/3 Magammana ,Homagama ,10200 , Sri Lanka", icon: MapPin },
@@ -25,13 +26,33 @@ const footerPageLinks = [
     { page_name: "Contact", page_link: "/#contact" }
 ];
 
-const supportLinks = [
+const supportLinksFallback = [
     { support_link_name: "Privacy policy", support_link_url: "/privacy-policy" },
     { support_link_name: "Refund policy", support_link_url: "/refund-policy" },
     { support_link_name: "Terms & Conditions", support_link_url: "/terms-and-conditions" }
 ];
 
-export const Footer = () => {
+interface FooterProps {
+    acfData?: AcfData;
+}
+
+export const Footer = ({ acfData }: FooterProps) => {
+    // Use dynamic data with fallbacks
+    const contacts = acfData?.contact_details || contactDetails.map(c => ({
+        acf_fc_layout: "contact",
+        contact_detail_title: c.title,
+        contact_image: { url: "" },
+        contact_details_: c.text
+    }));
+
+    const socials = acfData?.social_media || socialMediaLinks.map(s => ({
+        acf_fc_layout: "social_media",
+        social_media_icon: { url: "" },
+        social_media_link: s.url
+    }));
+
+    const exploreLinks = acfData?.footer_page_links || footerPageLinks;
+    const legalLinks = acfData?.support_links || supportLinksFallback;
     return (
         <footer className="bg-black text-white pt-24 pb-8 border-t border-white/10 relative overflow-hidden">
             {/* Subtle top glow */}
@@ -57,12 +78,45 @@ export const Footer = () => {
 
                             {/* Contact Details beneath brand */}
                             <ul className="space-y-4">
-                                {contactDetails.map((contact, idx) => {
-                                    const Icon = contact.icon;
+                                {contacts.map((contact, idx) => {
+                                    // Determine if it's an email, phone, or regular text based on the title
+                                    const titleStr = (contact.contact_detail_title || "").toLowerCase();
+
+                                    let href = "";
+                                    let isLink = false;
+                                    let IconComponent = MapPin;
+
+                                    if (titleStr.includes("mail") || titleStr.includes("email")) {
+                                        href = `mailto:${contact.contact_details_}`;
+                                        isLink = true;
+                                        IconComponent = Mail;
+                                    } else if (titleStr.includes("phone") || titleStr.includes("call")) {
+                                        href = `tel:${contact.contact_details_}`;
+                                        isLink = true;
+                                        IconComponent = Phone;
+                                    }
+
                                     return (
-                                        <li key={idx} className="flex items-center gap-3 text-gray-400">
-                                            <Icon size={18} />
-                                            <span className="text-sm">{contact.text}</span>
+                                        <li key={idx}>
+                                            {isLink ? (
+                                                <Link href={href} className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors group w-fit">
+                                                    {contact.contact_image?.url ? (
+                                                        <img src={contact.contact_image.url} alt={contact.contact_detail_title} className="w-5 h-5 object-contain invert opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all flex-shrink-0" />
+                                                    ) : (
+                                                        <IconComponent size={18} className="group-hover:scale-110 transition-transform" />
+                                                    )}
+                                                    <span className="text-sm group-hover:underline decoration-white/30 underline-offset-4">{contact.contact_details_}</span>
+                                                </Link>
+                                            ) : (
+                                                <div className="flex items-center gap-3 text-gray-400">
+                                                    {contact.contact_image?.url ? (
+                                                        <img src={contact.contact_image.url} alt={contact.contact_detail_title} className="w-5 h-5 object-contain invert opacity-70 flex-shrink-0" />
+                                                    ) : (
+                                                        <MapPin size={18} />
+                                                    )}
+                                                    <span className="text-sm">{contact.contact_details_}</span>
+                                                </div>
+                                            )}
                                         </li>
                                     );
                                 })}
@@ -80,10 +134,10 @@ export const Footer = () => {
                     >
                         <h4 className="text-sm font-semibold tracking-wider text-gray-500 uppercase mb-6">Explore</h4>
                         <ul className="space-y-4">
-                            {footerPageLinks.map((link, idx) => (
+                            {exploreLinks.map((link, idx) => (
                                 <li key={idx}>
                                     <Link
-                                        href={link.page_link}
+                                        href={link.page_link || "/"}
                                         className="text-gray-300 hover:text-white transition-colors text-sm hover:underline decoration-white/30 underline-offset-4"
                                     >
                                         {link.page_name}
@@ -103,10 +157,10 @@ export const Footer = () => {
                     >
                         <h4 className="text-sm font-semibold tracking-wider text-gray-500 uppercase mb-6">Legal</h4>
                         <ul className="space-y-4">
-                            {supportLinks.map((link, idx) => (
+                            {legalLinks.map((link, idx) => (
                                 <li key={idx}>
                                     <Link
-                                        href={link.support_link_url}
+                                        href={link.support_link_url || "/"}
                                         className="text-gray-300 hover:text-white transition-colors text-sm"
                                     >
                                         {link.support_link_name}
@@ -128,19 +182,21 @@ export const Footer = () => {
                 >
                     <p>© {new Date().getFullYear()} Axorah Global. All rights reserved.</p>
                     <div className="flex items-center gap-6">
-                        {socialMediaLinks.map((social, idx) => {
-                            const Icon = social.icon;
+                        {socials.map((social, idx) => {
                             return (
                                 <Link
                                     key={idx}
-                                    href={social.url}
+                                    href={social.social_media_link || "#"}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
-                                    aria-label={social.name}
+                                    aria-label="Social Link"
                                 >
-                                    <Icon size={20} className="group-hover:scale-110 transition-transform" />
-                                    <span className="sr-only">{social.name}</span>
+                                    {social.social_media_icon?.url ? (
+                                        <img src={social.social_media_icon.url} alt="Social media" className="w-5 h-5 object-contain group-hover:scale-110 transition-transform invert" />
+                                    ) : (
+                                        <ExternalLink size={20} className="group-hover:scale-110 transition-transform" />
+                                    )}
                                 </Link>
                             );
                         })}

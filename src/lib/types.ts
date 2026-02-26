@@ -90,6 +90,37 @@ export interface AcfAboutImageItem {
   image_descripation: string;
 }
 
+export interface AcfContactDetail {
+  acf_fc_layout: string;
+  contact_detail_title: string;
+  contact_image: {
+    url: string;
+    alt?: string;
+  };
+  contact_details_: string;
+}
+
+export interface AcfSocialMedia {
+  acf_fc_layout: string;
+  social_media_icon: {
+    url: string;
+    alt?: string;
+  };
+  social_media_link: string;
+}
+
+export interface AcfFooterPageLink {
+  acf_fc_layout: string;
+  page_name: string;
+  page_link: string;
+}
+
+export interface AcfSupportLink {
+  acf_fc_layout: string;
+  support_link_name: string;
+  support_link_url: string;
+}
+
 export interface AcfData {
   header_logo: boolean;
   nav_bar: AcfNavBarItem[];
@@ -108,6 +139,13 @@ export interface AcfData {
   button_about: string;
   button_link_about: string;
   about_small_images_: AcfAboutImageItem[];
+
+  // Footer fields
+  footer_logo: boolean;
+  social_media: AcfSocialMedia[];
+  contact_details: AcfContactDetail[];
+  footer_page_links: AcfFooterPageLink[];
+  support_links: AcfSupportLink[];
 }
 
 export interface WordPressPage {
