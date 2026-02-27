@@ -4,45 +4,21 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const FEEDBACK_DATA = {
-    feed_back_title: "Trusted partnerships and successful collaborations",
-    feed_back_sub_title:
-        "We’re true partners not vendors. Our relationships with our clients are long term and rewarding don’t take our word for it.",
-    feedbacks: [
-        {
-            client_image: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/pr1.jpg",
-                alt: "Michael Perera",
-            },
-            client_name: "Michael Perera",
-            client_position: "CEO, TechVision Solutions",
-            client_feedback:
-                "The team delivered our project on time with outstanding quality. Their technical expertise and communication made the entire process smooth and stress-free",
-        },
-        {
-            client_image: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/pr3.jpg",
-                alt: "Amanda Silva",
-            },
-            client_name: "Amanda Silva",
-            client_position: "Founder, BrightLaunch",
-            client_feedback:
-                "They transformed our idea into a fully functional platform. The design is modern, responsive, and user-friendly. Highly recommended!",
-        },
-        {
-            client_image: {
-                url: "http://axorah-global.local/wp-content/uploads/2026/02/pr2.jpg",
-                alt: "David Fernando",
-            },
-            client_name: "David Fernando",
-            client_position: "IT Manager, Nexa Systems",
-            client_feedback:
-                "Their custom software solution improved our operational efficiency significantly. Professional team with excellent support.",
-        },
-    ],
-};
+import { AcfFeedbackItem } from "@/lib/types";
 
-export const FeedbackSection = () => {
+interface FeedbackSectionProps {
+    title?: string;
+    subtitle?: string;
+    feedbacks?: AcfFeedbackItem[];
+}
+
+export const FeedbackSection = ({
+    title = "Trusted partnerships and successful collaborations",
+    subtitle = "We’re true partners not vendors. Our relationships with our clients are long term and rewarding don’t take our word for it.",
+    feedbacks = []
+}: FeedbackSectionProps) => {
+    if (!feedbacks || feedbacks.length === 0) return null;
+
     return (
         <section className="bg-black text-white py-24 px-6 lg:px-20 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
@@ -55,7 +31,7 @@ export const FeedbackSection = () => {
                         transition={{ duration: 0.6 }}
                         className="text-4xl md:text-5xl font-bold tracking-tight mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent"
                     >
-                        {FEEDBACK_DATA.feed_back_title}
+                        {title}
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -64,13 +40,13 @@ export const FeedbackSection = () => {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-lg text-gray-400 max-w-2xl mx-auto font-light leading-relaxed"
                     >
-                        {FEEDBACK_DATA.feed_back_sub_title}
+                        {subtitle}
                     </motion.p>
                 </div>
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {FEEDBACK_DATA.feedbacks.map((item, index) => (
+                    {feedbacks.map((item, index) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, y: 30 }}

@@ -109,6 +109,17 @@ export interface AcfSocialMedia {
   social_media_link: string;
 }
 
+export interface AcfFeedbackItem {
+  acf_fc_layout: string;
+  client_image: {
+    url: string;
+    alt?: string;
+  };
+  client_name: string;
+  client_position: string;
+  client_feedback: string;
+}
+
 export interface AcfFooterPageLink {
   acf_fc_layout: string;
   page_name: string;
@@ -139,6 +150,11 @@ export interface AcfData {
   button_about: string;
   button_link_about: string;
   about_small_images_: AcfAboutImageItem[];
+
+  // Feedback fields
+  feed_back_title: string;
+  feed_back_sub_title: string;
+  feedbacks: AcfFeedbackItem[];
 
   // Footer fields
   footer_logo: boolean;

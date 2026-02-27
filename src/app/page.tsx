@@ -67,7 +67,11 @@ export default async function Home() {
       )}
 
       {/* Feedback Section */}
-      <FeedbackSection />
+      <FeedbackSection
+        title={acf.feed_back_title}
+        subtitle={acf.feed_back_sub_title}
+        feedbacks={acf.feedbacks}
+      />
 
       {/* Short CTA Section */}
       <ShortSection />

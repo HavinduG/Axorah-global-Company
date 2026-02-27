@@ -45,9 +45,19 @@ export function Navbar({ navItems }: NavbarProps) {
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center space-x-8">
                     {navItems.map((item, index) => {
-                        const isHome = item.menu_page_name.toLowerCase() === 'home';
-                        const href = item.page_link || (isHome ? '/' : `/${item.menu_page_name.toLowerCase()}`);
-                        const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
+                        const isHome = item.menu_page_name.trim().toLowerCase() === 'home';
+                        let pathToCheck = item.page_link || (isHome ? '/' : `/${item.menu_page_name.trim().toLowerCase()}`);
+                        try {
+                            if (pathToCheck.startsWith('http')) {
+                                pathToCheck = new URL(pathToCheck).pathname;
+                            }
+                        } catch (e) { }
+
+                        const currentPath = pathname || '/';
+                        const isActive = (isHome && currentPath === '/') ||
+                            (pathToCheck === '/' ? currentPath === '/' : currentPath.startsWith(pathToCheck));
+
+                        const href = item.page_link || (isHome ? '/' : `/${item.menu_page_name.trim().toLowerCase()}`);
 
                         return (
                             <Link
@@ -92,9 +102,19 @@ export function Navbar({ navItems }: NavbarProps) {
                         className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-lg border-t border-white/10 md:hidden flex flex-col p-6 space-y-4"
                     >
                         {navItems.map((item, index) => {
-                            const isHome = item.menu_page_name.toLowerCase() === 'home';
-                            const href = item.page_link || (isHome ? '/' : `/${item.menu_page_name.toLowerCase()}`);
-                            const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
+                            const isHome = item.menu_page_name.trim().toLowerCase() === 'home';
+                            let pathToCheck = item.page_link || (isHome ? '/' : `/${item.menu_page_name.trim().toLowerCase()}`);
+                            try {
+                                if (pathToCheck.startsWith('http')) {
+                                    pathToCheck = new URL(pathToCheck).pathname;
+                                }
+                            } catch (e) { }
+
+                            const currentPath = pathname || '/';
+                            const isActive = (isHome && currentPath === '/') ||
+                                (pathToCheck === '/' ? currentPath === '/' : currentPath.startsWith(pathToCheck));
+
+                            const href = item.page_link || (isHome ? '/' : `/${item.menu_page_name.trim().toLowerCase()}`);
 
                             return (
                                 <Link

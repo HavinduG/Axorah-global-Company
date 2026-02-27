@@ -31,7 +31,7 @@ export default async function ContactPage() {
             <Contact3DHero />
 
             {/* Contact Hero Section / Details */}
-            <ContactHero />
+            <ContactHero acfData={acf} />
         </main>
     );
 }
