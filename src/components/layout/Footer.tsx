@@ -73,7 +73,9 @@ export const Footer = ({ acfData }: FooterProps) => {
                                 Axorah.
                             </Link>
                             <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-sm">
-                                Design smart, deliver fast. We build premium digital experiences that elevate brands and drive results.
+                                <b>ZenonTec - Powered by Axorah Global</b>
+                                <br />
+                                We design and build premium digital solutions that help businesses grow in the global digital economy
                             </p>
 
                             {/* Contact Details beneath brand */}

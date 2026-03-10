@@ -14,7 +14,7 @@ export default async function CapabilitiesPage() {
     if (!data) {
         return (
             <div className="flex items-center gap-4 flex-col justify-center h-screen bg-black text-white">
-                <p>Failed to load header data.</p>
+                <p>Failed to load data. Using fallback content.</p>
                 <CapabilitiesClient />
             </div>
         );
@@ -25,7 +25,10 @@ export default async function CapabilitiesPage() {
     return (
         <main className="min-h-screen bg-black">
             <Navbar navItems={acf.nav_bar} logo={acf.header_logo} />
-            <CapabilitiesClient />
+            <CapabilitiesClient
+                services={acf.services}
+                sectionTitle={acf.section_main_title}
+            />
         </main>
     );
 }

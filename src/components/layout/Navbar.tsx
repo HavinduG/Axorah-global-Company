@@ -75,7 +75,7 @@ export function Navbar({ navItems }: NavbarProps) {
                 {/* Right Side Actions */}
                 <div className="hidden md:flex items-center space-x-6">
                     <Link href="#" className="text-white hover:text-white/80 text-[15px] font-medium">
-                        Sign up
+                        Contact
                     </Link>
                     <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6 text-[15px] font-medium">
                         Start
@@ -135,7 +135,7 @@ export function Navbar({ navItems }: NavbarProps) {
                                 className="text-white/80 hover:text-white text-lg font-medium"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                Sign up
+                                Contact
                             </Link>
                             <Button className="bg-white text-black hover:bg-white/90 rounded-full w-full font-medium">
                                 Start

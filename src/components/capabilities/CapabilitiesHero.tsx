@@ -175,7 +175,7 @@ const DataStreamNebula = () => {
     );
 };
 
-export const CapabilitiesHero = () => {
+export const CapabilitiesHero = ({ sectionTitle }: { sectionTitle?: string }) => {
     return (
         <div
             className="relative w-full h-[50vh] min-h-[400px] max-h-[600px] overflow-hidden flex items-center justify-center border-b border-white/5 bg-black"
@@ -209,7 +209,7 @@ export const CapabilitiesHero = () => {
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-6"
                 >
-                    Our Capabilities
+                    {sectionTitle || 'Our Capabilities'}
                 </motion.h1>
 
                 <motion.p

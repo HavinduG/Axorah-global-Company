@@ -43,7 +43,10 @@ export default async function Home() {
       />
 
       {/* Interactive Scroll Section */}
-      <InteractiveScrollLayout />
+      <InteractiveScrollLayout
+        services={acf.services}
+        sectionTitle={acf.section_main_title}
+      />
 
       {/* About Section */}
       <AboutSection
@@ -74,7 +77,11 @@ export default async function Home() {
       />
 
       {/* Short CTA Section */}
-      <ShortSection />
+      <ShortSection
+        title={acf.short_section_title}
+        ctaButtonText={acf.button_sub}
+      />
     </main>
   );
 }
+

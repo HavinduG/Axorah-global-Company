@@ -132,6 +132,13 @@ export interface AcfSupportLink {
   support_link_url: string;
 }
 
+export interface AcfServiceItem {
+  acf_fc_layout: string;
+  service_title: string;
+  service_short_description: string;
+  service_description: string; // HTML string
+}
+
 export interface AcfData {
   header_logo: boolean;
   nav_bar: AcfNavBarItem[];
@@ -162,6 +169,15 @@ export interface AcfData {
   contact_details: AcfContactDetail[];
   footer_page_links: AcfFooterPageLink[];
   support_links: AcfSupportLink[];
+
+  // Capabilities / Services
+  section_main_title: string;
+  services: AcfServiceItem[];
+
+  // Short CTA Section
+  short_section_title: string;
+  button_sub: string;
+  button_sub_link: string;
 }
 
 export interface WordPressPage {

@@ -88,7 +88,17 @@ const AbstractHand = () => {
     );
 };
 
-export const ShortSection = () => {
+interface ShortSectionProps {
+    title?: string;       // from acf.short_section_title
+    ctaButtonText?: string; // from acf.button_sub
+}
+
+export const ShortSection = ({ title, ctaButtonText }: ShortSectionProps) => {
+    // WordPress stores the title with a line-separator character (\u2028) between the two lines
+    // Split on that or on a literal newline so we can render them on separate lines
+    const titleLines = title
+        ? title.split(/[\u2028\n]/).map((l) => l.trim()).filter(Boolean)
+        : ['Design smart', 'Deliver fast'];
     return (
         <section className="relative bg-black text-white py-32 md:py-48 overflow-hidden min-h-[70vh] flex flex-col items-center justify-center">
 
@@ -111,10 +121,9 @@ export const ShortSection = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                     className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight mb-8 md:mb-12 leading-[1.1]"
-                    style={{ textShadow: "0px 4px 20px rgba(0, 0, 0, 0.9)" }} // Better readability over wireframe
+                    style={{ textShadow: "0px 4px 20px rgba(0, 0, 0, 0.9)" }}
                 >
-                    Design smart<br />
-                    Deliver fast
+                    {titleLines[0]}{titleLines.length > 1 && <><br />{titleLines[1]}</>}
                 </framerMotion.h2>
 
                 <framerMotion.div
@@ -134,7 +143,7 @@ export const ShortSection = () => {
                         href="/#contact"
                         className="px-8 py-3 rounded-full bg-zinc-900/50 text-white font-medium hover:bg-zinc-800 transition-colors text-sm backdrop-blur-md border border-white/10"
                     >
-                        Contact
+                        {ctaButtonText || 'Contact'}
                     </Link>
                 </framerMotion.div>
             </div>
