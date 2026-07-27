@@ -92,9 +92,8 @@ export function Hero({ heroData }: HeroProps) {
 
             {/* Content */}
             <div className="relative z-10 container mx-auto px-6 text-center max-w-4xl pt-20">
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
-                    <span className="hero-text-element block">{heroData.main_title ? heroData.main_title.split(' ').slice(0, 2).join(' ') : 'Design better'}</span>
-                    <span className="hero-text-element block">{heroData.main_title ? heroData.main_title.split(' ').slice(2).join(' ') : 'Build faster'}</span>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white mb-6 leading-tight md:leading-tight lg:leading-tight text-balance mx-auto">
+                    <span className="hero-text-element inline-block">{heroData.main_title || 'Design better Build faster'}</span>
                 </h1>
 
                 <p className="hero-text-element text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">

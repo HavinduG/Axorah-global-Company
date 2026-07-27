@@ -1,13 +1,29 @@
-import { getHomePageData, getProjects } from '@/lib/api';
-import { Navbar } from '@/components/layout/Navbar';
-import { Hero } from '@/components/home/Hero';
-import { TemplatesSection } from '@/components/home/TemplatesSection';
-import { InteractiveScrollLayout } from '@/components/home/InteractiveScrollLayout';
-import { AboutSection } from '@/components/home/AboutSection';
+import { getHomePageData, getProjects } from "@/lib/api";
+import { Navbar } from "@/components/layout/Navbar";
+import { Hero } from "@/components/home/Hero";
+import { TemplatesSection } from "@/components/home/TemplatesSection";
+import { InteractiveScrollLayout } from "@/components/home/InteractiveScrollLayout";
+import { AboutSection } from "@/components/home/AboutSection";
 import { WorkSection } from "@/components/home/WorkSection";
 import { FeedbackSection } from "@/components/home/FeedbackSection";
 import { ProjectsSection } from "@/components/home/ProjectsSection";
 import { ShortSection } from "@/components/home/ShortSection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ZenonTec | IT Solutions & Digital Marketing Company in Sri Lanka",
+  description:
+    "ZenonTec is a Sri Lanka-based IT solutions and digital marketing company serving businesses worldwide. We build websites, software, e-commerce platforms, automation systems, and online growth campaigns.",
+  keywords: [
+    "IT solutions company Sri Lanka",
+    "digital marketing company Sri Lanka",
+    "website development Sri Lanka",
+    "software development company Sri Lanka",
+    "e-commerce website development",
+    "digital marketing services worldwide",
+    "web development company for startups",
+  ],
+};
 
 export default async function Home() {
   const data = await getHomePageData();
@@ -46,6 +62,7 @@ export default async function Home() {
       <InteractiveScrollLayout
         services={acf.services}
         sectionTitle={acf.section_main_title}
+        sectionDescription={acf.capabilities_description}
       />
 
       {/* About Section */}
@@ -79,9 +96,9 @@ export default async function Home() {
       {/* Short CTA Section */}
       <ShortSection
         title={acf.short_section_title}
+        description={acf.short_section_description}
         ctaButtonText={acf.button_sub}
       />
     </main>
   );
 }
-

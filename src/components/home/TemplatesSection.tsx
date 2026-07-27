@@ -170,7 +170,8 @@ export function TemplatesSection({
               <div className="p-8 md:p-12 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-3xl shadow-[0_0_60px_rgba(255,255,255,0.05)]">
                 <div className="text-center mb-8">
                   <h3 className="text-xs md:text-sm uppercase tracking-[0.3em] text-gray-400 font-medium">
-                    Trusted By
+                    Trusted by growing brands across Sri Lanka, UAE & global
+                    markets
                   </h3>
                 </div>
                 <div className="flex flex-wrap items-center justify-center gap-x-8 md:gap-x-12 gap-y-8">

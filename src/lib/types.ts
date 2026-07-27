@@ -140,7 +140,7 @@ export interface AcfServiceItem {
 }
 
 export interface AcfData {
-  header_logo: boolean;
+  header_logo: false | string | { url: string; alt?: string; [key: string]: unknown };
   nav_bar: AcfNavBarItem[];
   button_start: string;
   button_start_link: string;
@@ -164,7 +164,7 @@ export interface AcfData {
   feedbacks: AcfFeedbackItem[];
 
   // Footer fields
-  footer_logo: boolean;
+  footer_logo: false | string | { url: string; alt?: string; [key: string]: unknown };
   social_media: AcfSocialMedia[];
   contact_details: AcfContactDetail[];
   footer_page_links: AcfFooterPageLink[];
@@ -172,10 +172,12 @@ export interface AcfData {
 
   // Capabilities / Services
   section_main_title: string;
+  capabilities_description: string;
   services: AcfServiceItem[];
 
   // Short CTA Section
   short_section_title: string;
+  short_section_description?: string;
   button_sub: string;
   button_sub_link: string;
 }

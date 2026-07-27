@@ -4,8 +4,8 @@ import { ContactHero } from "@/components/contact/ContactHero";
 import { Contact3DHero } from "@/components/contact/Contact3DHero";
 
 export const metadata = {
-    title: "Contact Us | Axorah Global",
-    description: "Get in touch with Axorah Global. We are ready to elevate your digital presence and build something extraordinary.",
+    title: "Contact ZenonTec | IT Solutions & Digital Marketing Company in Sri Lanka",
+    description: "Contact ZenonTec for web development, software development, SEO, digital marketing, paid ads, lead generation, and digital growth services in Sri Lanka and worldwide.",
 };
 
 export default async function ContactPage() {

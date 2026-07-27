@@ -72,7 +72,7 @@ export const WorkGrid = ({ projects }: WorkGridProps) => {
                         return (
                             <motion.div key={project.id} variants={itemVariants}>
                                 <Link href={`/project/${project.slug}`} className="block group">
-                                    <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-zinc-900 mb-6 border border-white/10">
+                                    <div className="relative aspect-video rounded-3xl overflow-hidden bg-zinc-900 mb-6 border border-white/10">
                                         {/* Image wrapper for scaling effect */}
                                         <div className="absolute inset-0 w-full h-full transition-transform duration-700 ease-out group-hover:scale-110">
                                             {imageUrl ? (
@@ -81,7 +81,7 @@ export const WorkGrid = ({ projects }: WorkGridProps) => {
                                                     alt={title}
                                                     fill
                                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                    className="object-cover"
+                                                    className="object-contain"
                                                     priority={false}
                                                     unoptimized={true}
                                                 />
