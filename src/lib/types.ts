@@ -146,7 +146,7 @@ export interface AcfServiceSection {
 }
 
 export interface AcfData {
-  header_logo: false | string | { url: string; alt?: string; [key: string]: unknown };
+  header_logo: false | string | { url: string; alt?: string;[key: string]: unknown };
   nav_bar: AcfNavBarItem[];
   button_start: string;
   button_start_link: string;
@@ -170,7 +170,7 @@ export interface AcfData {
   feedbacks: AcfFeedbackItem[];
 
   // Footer fields
-  footer_logo: false | string | { url: string; alt?: string; [key: string]: unknown };
+  footer_logo: false | string | { url: string; alt?: string;[key: string]: unknown };
   social_media: AcfSocialMedia[];
   contact_details: AcfContactDetail[];
   footer_page_links: AcfFooterPageLink[];
@@ -246,6 +246,10 @@ export interface ProjectAcf {
   project_image: ProjectImage;
   project_gallery: ProjectImage[];
   project_description: string;
+  publish_date?: string;
+  status?: string;
+  industry?: string;
+  market?: string;
 }
 
 export interface WordPressProject {

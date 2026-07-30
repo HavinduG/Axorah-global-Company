@@ -110,16 +110,28 @@ export default async function ProjectPage(props: ProjectPageProps) {
                             <ul className="space-y-4 text-sm">
                                 <li className="flex justify-between items-center border-b border-white/10 pb-4">
                                     <span className="text-gray-500">Published</span>
-                                    <span className="text-gray-200">{formattedDate}</span>
+                                    <span className="text-gray-200">{acf.publish_date || formattedDate}</span>
                                 </li>
                                 <li className="flex justify-between items-center border-b border-white/10 pb-4">
                                     <span className="text-gray-500">Status</span>
-                                    <span className="text-gray-200 capitalize">{project.status}</span>
+                                    <span className="text-gray-200 capitalize">{acf.status || project.status}</span>
                                 </li>
                                 {acf.project_name && (
-                                    <li className="flex justify-between items-center pb-2">
+                                    <li className="flex justify-between items-center border-b border-white/10 pb-4">
                                         <span className="text-gray-500">Client / Project</span>
-                                        <span className="text-gray-200">{acf.project_name}</span>
+                                        <span className="text-gray-200 text-right">{acf.project_name}</span>
+                                    </li>
+                                )}
+                                {acf.industry && (
+                                    <li className="flex justify-between items-center border-b border-white/10 pb-4">
+                                        <span className="text-gray-500">Industry</span>
+                                        <span className="text-gray-200 text-right">{acf.industry}</span>
+                                    </li>
+                                )}
+                                {acf.market && (
+                                    <li className="flex justify-between items-center pb-2">
+                                        <span className="text-gray-500">Market</span>
+                                        <span className="text-gray-200 text-right">{acf.market}</span>
                                     </li>
                                 )}
                             </ul>
