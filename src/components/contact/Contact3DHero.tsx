@@ -183,7 +183,9 @@ export const Contact3DHero = () => {
                         Send a <span className="text-[#a78bfa]">Message</span>
                     </h1>
                     <p className="text-gray-400 font-light">
-                        Step into our gravity well. We read every message and usually respond within 24 hours.
+                        Ready to build, launch, or grow your digital presence? Send us your project details and our team will get
+back to you as soon as possible.
+
                     </p>
                 </motion.div>
 
@@ -217,10 +219,30 @@ export const Contact3DHero = () => {
                             />
                         </div>
                         <div className="flex flex-col gap-2">
+                            <label htmlFor="service" className="text-xs uppercase tracking-widest text-gray-500 font-medium ml-1">Service Required</label>
+                            <div className="relative">
+                                <select
+                                    id="service"
+                                    defaultValue=""
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all appearance-none cursor-pointer"
+                                >
+                                    <option value="" disabled className="text-gray-500 bg-zinc-900">Select a service...</option>
+                                    <option value="Web & App Development" className="text-white bg-zinc-900">Web & App Development</option>
+                                    <option value="Digital Marketing & SEO" className="text-white bg-zinc-900">Digital Marketing & SEO</option>
+                                    <option value="Software & Business Systems" className="text-white bg-zinc-900">Software & Business Systems</option>
+                                    <option value="UI/UX Design & Creative Solutions" className="text-white bg-zinc-900">UI/UX Design & Creative Solutions</option>
+                                    <option value="Not sure yet" className="text-white bg-zinc-900">Not sure yet</option>
+                                </select>
+                                <div className="absolute inset-y-0 right-5 flex items-center pointer-events-none text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-2">
                             <label htmlFor="message" className="text-xs uppercase tracking-widest text-gray-500 font-medium ml-1">Message</label>
                             <textarea
                                 id="message"
-                                placeholder="How can we help?"
+                                placeholder="Tell us about your business, goals, timeline, and budget."
                                 rows={4}
                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all resize-none"
                             ></textarea>
@@ -233,6 +255,18 @@ export const Contact3DHero = () => {
                             <span>Launch Message</span>
                             <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
                         </button>
+
+                        <a
+                            href="https://wa.me/94775053300"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 font-semibold rounded-xl py-4 flex items-center justify-center gap-2 hover:bg-[#25D366]/20 transition-colors group/wa"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 group-hover/wa:scale-110 transition-transform">
+                                <path d="M11.99 2C6.47 2 2 6.48 2 12c0 1.76.45 3.42 1.25 4.88L2 22l5.31-1.18c1.42.74 3.03 1.18 4.68 1.18 5.52 0 10-4.48 10-10S17.51 2 11.99 2zm0 18.06c-1.46 0-2.88-.38-4.14-1.09l-.3-.17-3.08.68.69-3.03-.2-.31A8.044 8.044 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8.06-8.01 8.06zm4.39-5.96c-.24-.12-1.41-.7-1.63-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.04-.7-.52-1.17-1.16-1.31-1.4-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.34.98 2.5c.12.16 1.7 2.6 4.12 3.6.58.24 1.03.38 1.38.49.58.18 1.11.16 1.53.1.47-.07 1.41-.58 1.61-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/>
+                            </svg>
+                            <span>Chat on WhatsApp</span>
+                        </a>
                     </form>
                 </motion.div>
 

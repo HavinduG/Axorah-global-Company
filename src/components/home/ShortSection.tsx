@@ -127,7 +127,7 @@ export const ShortSection = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-3xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 leading-tight text-balance whitespace-nowrap"
+          className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 leading-tight text-balance whitespace-normal md:whitespace-nowrap px-2"
           style={{ textShadow: "0px 4px 20px rgba(0, 0, 0, 0.9)" }}
         >
           {displayTitle}
@@ -139,8 +139,8 @@ export const ShortSection = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-gray-400 text-xs md:text-sm lg:text-base font-light mb-10 max-w-2xl leading-relaxed"
-            style={{ textShadow: "0px 2px 10px rgba(0, 0, 0, 0.8)" }}
+            className="text-gray-300 text-sm md:text-base font-light mb-10 max-w-2xl leading-relaxed px-4"
+            style={{ textShadow: "0px 2px 10px rgba(0, 0, 0, 0.9)" }}
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}
@@ -150,19 +150,19 @@ export const ShortSection = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center gap-4"
+          className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto px-4"
         >
           <Link
             href="/#start"
-            className="px-8 py-3 rounded-full bg-white text-black font-medium hover:bg-gray-200 transition-colors text-sm border border-transparent"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors text-sm border border-transparent text-center shadow-[0_0_20px_rgba(255,255,255,0.1)]"
           >
             Start for work
           </Link>
           <Link
             href="/#contact"
-            className="px-8 py-3 rounded-full bg-zinc-900/50 text-white font-medium hover:bg-zinc-800 transition-colors text-sm backdrop-blur-md border border-white/10"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-zinc-900/80 text-white font-semibold hover:bg-zinc-800 transition-colors text-sm backdrop-blur-md border border-white/20 text-center shadow-[0_0_20px_rgba(0,0,0,0.5)]"
           >
-            {ctaButtonText || "Contact"}
+            {ctaButtonText || "Book a Free Consultation"}
           </Link>
         </framerMotion.div>
       </div>

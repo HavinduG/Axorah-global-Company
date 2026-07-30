@@ -3,7 +3,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { WordPressProject } from "@/lib/types";
 import { motion } from "framer-motion";
 
@@ -18,7 +17,7 @@ export const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
 
   return (
     <section className="bg-black text-white py-12 md:py-16 overflow-hidden flex flex-col justify-center min-h-screen lg:min-h-[90vh]">
-      <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-12 mb-8 md:mb-10">
+      <div className="max-w-350 mx-auto w-full px-6 lg:px-12 mb-8 md:mb-10">
         <div className="flex flex-col gap-3 md:gap-4 max-w-4xl">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -64,7 +63,7 @@ export const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
                   <Link
                     href={`/project/${project.slug}`}
                     key={`track${trackIdx}-${project.id}-${idx}`}
-                    className="block shrink-0 w-[260px] sm:w-[320px] md:w-[400px] lg:w-[450px] group/card"
+                    className="block shrink-0 w-65 sm:w-[320px] md:w-100 lg:w-112.5 group/card"
                   >
                     <div className="relative aspect-video rounded-2xl overflow-hidden mb-4 bg-zinc-900 border border-white/10">
                       {imageUrl && (
@@ -105,7 +104,7 @@ export const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-12 mt-8 md:mt-10 flex justify-start">
+      <div className="max-w-350 mx-auto w-full px-6 lg:px-12 mt-8 md:mt-10 flex justify-start">
         <Link
           href="/work"
           className="group flex items-center gap-3 text-white border-b border-white pb-1 w-fit hover:opacity-70 transition-opacity"

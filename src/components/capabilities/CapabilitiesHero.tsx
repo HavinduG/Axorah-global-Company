@@ -178,7 +178,7 @@ export const CapabilitiesHero = ({
   sectionDescription?: string;
 }) => {
   return (
-    <div className="relative w-full h-[50vh] min-h-[400px] max-h-[600px] overflow-hidden flex items-center justify-center border-b border-white/5 bg-black">
+    <div className="relative w-full h-[50vh] min-h-100 max-h-150 overflow-hidden flex items-center justify-center border-b border-white/5 bg-black">
       {/* 3D Canvas Background */}
       <div className="absolute inset-0 z-0">
         <Canvas>
@@ -188,27 +188,15 @@ export const CapabilitiesHero = ({
       </div>
 
       {/* Gradient Overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent z-10 pointer-events-none" />
 
       {/* Content Overlay */}
       <div className="relative z-20 flex flex-col items-center justify-center text-center px-6 mt-16 max-w-5xl mx-auto pointer-events-none">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6"
-        >
-          <span className="w-2 h-2 rounded-full bg-gray-300 animate-pulse" />
-          <span className="text-xs font-medium tracking-widest text-[#a1a1aa] uppercase">
-            Discover
-          </span>
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-6"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-6 leading-[1.1]"
         >
           {sectionTitle || "Our Capabilities"}
         </motion.h1>
@@ -217,7 +205,7 @@ export const CapabilitiesHero = ({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="text-lg md:text-xl text-[#a1a1aa] max-w-2xl font-light leading-relaxed prose prose-invert prose-p:my-2"
+          className="text-base md:text-lg lg:text-xl text-[#a1a1aa] max-w-3xl font-light leading-relaxed prose prose-invert prose-p:my-2"
           dangerouslySetInnerHTML={{
             __html:
               sectionDescription ||
@@ -231,9 +219,9 @@ export const CapabilitiesHero = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 hidden md:flex"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2"
       >
-        <div className="w-[1px] h-12 bg-gradient-to-b from-white/30 to-transparent relative overflow-hidden">
+        <div className="w-px h-12 bg-linear-to-b from-white/30 to-transparent relative overflow-hidden">
           <motion.div
             className="w-full h-1/2 bg-white/60"
             animate={{ y: ["-100%", "200%"] }}

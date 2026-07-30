@@ -139,6 +139,12 @@ export interface AcfServiceItem {
   service_description: string; // HTML string
 }
 
+export interface AcfServiceSection {
+  acf_fc_layout: string;
+  main_title: string;
+  service_description: string;
+}
+
 export interface AcfData {
   header_logo: false | string | { url: string; alt?: string; [key: string]: unknown };
   nav_bar: AcfNavBarItem[];
@@ -174,12 +180,21 @@ export interface AcfData {
   section_main_title: string;
   capabilities_description: string;
   services: AcfServiceItem[];
+  service_sections?: AcfServiceSection[];
 
   // Short CTA Section
   short_section_title: string;
   short_section_description?: string;
   button_sub: string;
   button_sub_link: string;
+
+  // Final Services CTA Section
+  cta_section?: string;
+  cta_description?: string;
+  button_1?: string;
+  button_1_url?: string;
+  button_2?: string;
+  button_2_url?: string;
 }
 
 export interface WordPressPage {

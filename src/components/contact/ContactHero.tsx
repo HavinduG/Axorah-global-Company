@@ -54,7 +54,7 @@ export const ContactHero = ({ acfData }: ContactHeroProps) => {
         <section
             ref={containerRef}
             onMouseMove={handleMouseMove}
-            className="relative w-full min-h-screen bg-black overflow-hidden flex items-center pt-32 pb-20 justify-center"
+            className="relative w-full min-h-screen bg-black overflow-hidden flex flex-col items-center pt-32 pb-20 justify-center"
         >
             {/* Dynamic Interactive Glow */}
             <motion.div
@@ -88,7 +88,10 @@ export const ContactHero = ({ acfData }: ContactHeroProps) => {
                         </span>
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-400 font-light max-w-xl leading-relaxed">
-                        Ready to elevate your digital presence? We're here to turn your vision into an exceptional reality.
+                     Ready to elevate your digital presence? ZenonTec helps businesses in Sri Lanka and worldwide build
+websites, software systems, e-commerce platforms, SEO strategies, digital campaigns, and lead generation
+systems that support real business growth.
+
                     </p>
                 </motion.div>
 
@@ -177,6 +180,42 @@ export const ContactHero = ({ acfData }: ContactHeroProps) => {
                         </div>
                     </motion.div>
                 </div>
+            </div>
+
+            {/* WhatsApp CTA Card - Final Section */}
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 mt-20">
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+                    className="w-full p-8 md:p-12 rounded-3xl border border-[#25D366]/20 bg-gradient-to-br from-[#25D366]/10 via-black to-black backdrop-blur-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_0_50px_rgba(37,211,102,0.05)]"
+                >
+                    {/* Glowing effect inside card */}
+                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,rgba(37,211,102,0.15),transparent_50%)] pointer-events-none" />
+
+                    <div className="flex flex-col gap-4 max-w-2xl relative z-10">
+                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white flex items-center gap-3">
+                            Prefer a quick chat?
+                        </h2>
+                        <p className="text-gray-400 text-lg leading-relaxed font-light">
+                            Message us directly on WhatsApp and tell us what you need. Our team can guide you with the right solution for your website, software, SEO, digital marketing, or lead generation requirement.
+                        </p>
+                    </div>
+
+                    <div className="relative z-10 w-full md:w-auto shrink-0">
+                        <a
+                            href="https://wa.me/94775053300"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full md:w-auto bg-[#25D366] text-black font-semibold rounded-full px-8 py-4 flex items-center justify-center gap-3 hover:bg-[#20bd5a] transition-all hover:scale-105 shadow-[0_0_30px_rgba(37,211,102,0.3)] group"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 group-hover:rotate-12 transition-transform">
+                                <path d="M11.99 2C6.47 2 2 6.48 2 12c0 1.76.45 3.42 1.25 4.88L2 22l5.31-1.18c1.42.74 3.03 1.18 4.68 1.18 5.52 0 10-4.48 10-10S17.51 2 11.99 2zm0 18.06c-1.46 0-2.88-.38-4.14-1.09l-.3-.17-3.08.68.69-3.03-.2-.31A8.044 8.044 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8.06-8.01 8.06zm4.39-5.96c-.24-.12-1.41-.7-1.63-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.04-.7-.52-1.17-1.16-1.31-1.4-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.34.98 2.5c.12.16 1.7 2.6 4.12 3.6.58.24 1.03.38 1.38.49.58.18 1.11.16 1.53.1.47-.07 1.41-.58 1.61-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/>
+                            </svg>
+                            <span className="text-lg">Chat on WhatsApp</span>
+                        </a>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

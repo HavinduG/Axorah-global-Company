@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 import { AcfFeedbackItem } from "@/lib/types";
@@ -98,7 +98,7 @@ export const FeedbackSection = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold tracking-tight mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent"
+            className="text-4xl md:text-5xl font-bold tracking-tight mb-6 bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent"
           >
             {title}
           </motion.h2>
@@ -115,7 +115,7 @@ export const FeedbackSection = ({
       </div>
 
       {/* Slider / Marquee */}
-      <div className="relative w-full mt-6 max-w-7xl mx-auto px-6 lg:px-20 h-[380px] md:h-[320px] flex items-center justify-center">
+      <div className="relative w-full mt-6 max-w-7xl mx-auto px-6 lg:px-20 h-95 md:h-80 flex items-center justify-center">
         {displayFeedbacks.map((item, index) => {
           const state = getCardState(index);
           return (
@@ -132,7 +132,7 @@ export const FeedbackSection = ({
               drag={state === "active" ? "x" : false}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={1}
-              onDragEnd={(e, { offset }) => {
+              onDragEnd={(_, { offset }) => {
                 if (offset.x < -50) {
                   paginate(1);
                 } else if (offset.x > 50) {
@@ -140,7 +140,7 @@ export const FeedbackSection = ({
                 }
               }}
               className={cn(
-                "absolute h-full w-[320px] sm:w-[400px] md:w-[450px]",
+                "absolute h-full w-[320px] sm:w-100 md:w-112.5",
                 state === "active"
                   ? "cursor-grab active:cursor-grabbing"
                   : "cursor-pointer",

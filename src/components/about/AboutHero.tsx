@@ -254,7 +254,7 @@ export const AboutHero = ({ mainTitle, sectionTitle, smallDescription }: AboutHe
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8 leading-[1.1]"
+                    className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-8 leading-[1.1]"
                 >
                     {sectionTitle}
                 </motion.h1>
@@ -263,7 +263,7 @@ export const AboutHero = ({ mainTitle, sectionTitle, smallDescription }: AboutHe
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl leading-relaxed"
+                    className="text-base md:text-lg lg:text-xl text-gray-400 font-light max-w-3xl leading-relaxed"
                 >
                     {smallDescription}
                 </motion.p>

@@ -220,7 +220,7 @@ export const InteractiveScrollLayout = ({
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.5, ease: "circOut" }}
-          className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left"
+          className="w-full h-px bg-linear-to-r from-transparent via-white/20 to-transparent origin-left"
         />
       </div>
 
@@ -259,7 +259,7 @@ export const InteractiveScrollLayout = ({
       <div className="flex flex-col lg:flex-row-reverse">
         {/* Right Column: 3D Canvas (Sticky) - First in DOM for correct Mobile Stack */}
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-screen sticky top-0 lg:top-0 items-center justify-center p-4 lg:p-12 bg-zinc-950 border-l border-white/5 z-0 lg:flex">
-          <div className="relative w-full h-full max-h-[800px] rounded-[2rem] overflow-hidden border border-white/5 bg-gradient-to-br from-zinc-900 to-black shadow-2xl transition-all duration-700 ease-in-out">
+          <div className="relative w-full h-full max-h-200 rounded-[2rem] overflow-hidden border border-white/5 bg-linear-to-br from-zinc-900 to-black shadow-2xl transition-all duration-700 ease-in-out">
             {/* iOS-style header/notch simulation */}
             <div className="absolute top-0 left-0 w-full h-12 border-b border-white/5 flex items-center px-6 gap-2 z-20 bg-black/50 backdrop-blur-md">
               <div className="w-3 h-3 rounded-full bg-red-500/80" />
@@ -328,7 +328,7 @@ export const InteractiveScrollLayout = ({
                 >
                   <div className="flex items-center gap-4 mb-6">
                     <div
-                      className="h-[2px] w-12"
+                      className="h-0.5 w-12"
                       style={{ backgroundColor: color }}
                     />
                     <span className="text-sm font-medium tracking-wider uppercase text-gray-400">
