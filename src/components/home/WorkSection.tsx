@@ -35,8 +35,8 @@ export const WorkSection = ({ workMainTitle, worksTabs }: WorkSectionProps) => {
     };
 
     return (
-        <section className="bg-black text-white py-24 px-6 lg:px-20 overflow-hidden relative min-h-screen flex items-center">
-            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <section className="bg-black text-white py-16 md:py-24 px-6 lg:px-20 overflow-hidden relative min-h-screen flex items-center">
+            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 lg:gap-24 items-center">
 
                 {/* Left Content: Description & Icon */}
                 <div className="flex flex-col justify-center relative z-10">
@@ -52,7 +52,7 @@ export const WorkSection = ({ workMainTitle, worksTabs }: WorkSectionProps) => {
                     </motion.div>
 
                     {/* Animate text content content change */}
-                    <div className="relative h-[400px]"> {/* Fixed height container to prevent layout jump */}
+                    <div className="relative min-h-[500px] sm:min-h-[400px] lg:min-h-[400px]"> {/* Responsive min-height to prevent layout jump while allowing content to grow */}
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={currentIndex}
@@ -60,9 +60,9 @@ export const WorkSection = ({ workMainTitle, worksTabs }: WorkSectionProps) => {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 20 }}
                                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                                className="absolute inset-0"
+                                className="w-full"
                             >
-                                <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm shadow-xl">
+                                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm shadow-xl h-full">
                                     <div className="w-12 h-12 mb-6 bg-white/10 rounded-full flex items-center justify-center p-2.5">
                                         {/* eslint-disable-next-line @next/next/no-img-element */}
                                         <img
@@ -102,7 +102,7 @@ export const WorkSection = ({ workMainTitle, worksTabs }: WorkSectionProps) => {
 
 
                 {/* Right Content: Video Only */}
-                <div className="relative h-[500px] lg:h-[600px] w-full flex items-center justify-center">
+                <div className="relative h-[350px] md:h-[500px] lg:h-[600px] w-full flex items-center justify-center">
                     {worksTabs.map((work, idx) => {
                         const isActive = currentIndex === idx;
                         return (

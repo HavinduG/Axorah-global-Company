@@ -114,10 +114,6 @@ export function TemplatesSection({
 
   const transforms = [y1, y2, y3, y4, y5];
 
-  // Customer section fade up (appears in the last 25% of scroll)
-  const customerOpacity = useTransform(springProgress, [0.75, 1], [0, 1]);
-  const customerY = useTransform(springProgress, [0.75, 1], [50, 0]);
-
   // Number of columns to show based on screen width
   const numColumns =
     windowWidth >= 1280
@@ -161,32 +157,6 @@ export function TemplatesSection({
         {/* Top and Bottom Fade Overlays */}
         <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black via-black/80 to-transparent z-20 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-full h-[45vh] bg-gradient-to-t from-black via-black/95 to-transparent z-20 pointer-events-none flex items-end justify-center pb-12 md:pb-24">
-          {/* Customer Section placed inside the bottom fade */}
-          {customers && customers.length > 0 && (
-            <motion.div
-              style={{ opacity: customerOpacity, y: customerY }}
-              className="relative z-30 w-full max-w-5xl mx-auto px-4 pointer-events-auto"
-            >
-              <div className="p-8 md:p-12 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-3xl shadow-[0_0_60px_rgba(255,255,255,0.05)]">
-                <div className="text-center mb-8">
-                  <h3 className="text-xs md:text-sm uppercase tracking-[0.3em] text-gray-400 font-medium">
-                    Trusted by growing brands across Sri Lanka, UAE & global
-                    markets
-                  </h3>
-                </div>
-                <div className="flex flex-wrap items-center justify-center gap-x-8 md:gap-x-12 gap-y-8">
-                  {customers.map((customer, index) => (
-                    <div
-                      key={index}
-                      className="text-lg md:text-2xl font-bold text-white/50 hover:text-white transition-colors duration-300 cursor-default select-none"
-                    >
-                      {customer.client_brand_name}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
         </div>
       </div>
     </section>

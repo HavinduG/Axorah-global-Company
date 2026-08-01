@@ -98,15 +98,22 @@ export function Navbar({ navItems, logo }: NavbarProps) {
 
         {/* Right Side Actions */}
         <div className="hidden md:flex items-center space-x-6">
-          <Link
-            href="#"
-            className="text-white hover:text-white/80 text-[15px] font-medium"
+          <a
+            href="https://wa.me/94775053300"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-white/80 text-[15px] font-medium flex items-center gap-2"
           >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.99 2C6.47 2 2 6.48 2 12c0 1.76.45 3.42 1.25 4.88L2 22l5.31-1.18c1.42.74 3.03 1.18 4.68 1.18 5.52 0 10-4.48 10-10S17.51 2 11.99 2zm0 18.06c-1.46 0-2.88-.38-4.14-1.09l-.3-.17-3.08.68.69-3.03-.2-.31A8.044 8.044 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8.06-8.01 8.06zm4.39-5.96c-.24-.12-1.41-.7-1.63-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.04-.7-.52-1.17-1.16-1.31-1.4-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.34.98 2.5c.12.16 1.7 2.6 4.12 3.6.58.24 1.03.38 1.38.49.58.18 1.11.16 1.53.1.47-.07 1.41-.58 1.61-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/>
+            </svg>
             Let's Talk
+          </a>
+          <Link href="/work">
+            <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6 text-[15px] font-medium">
+              Start
+            </Button>
           </Link>
-          <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6 text-[15px] font-medium">
-            Start
-          </Button>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -168,16 +175,23 @@ export function Navbar({ navItems, logo }: NavbarProps) {
               );
             })}
             <div className="border-t border-white/10 pt-4 flex flex-col space-y-4">
-              <Link
-                href="#"
-                className="text-white/80 hover:text-white text-lg font-medium"
+              <a
+                href="https://wa.me/94775053300"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white text-lg font-medium flex items-center gap-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Contact
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M11.99 2C6.47 2 2 6.48 2 12c0 1.76.45 3.42 1.25 4.88L2 22l5.31-1.18c1.42.74 3.03 1.18 4.68 1.18 5.52 0 10-4.48 10-10S17.51 2 11.99 2zm0 18.06c-1.46 0-2.88-.38-4.14-1.09l-.3-.17-3.08.68.69-3.03-.2-.31A8.044 8.044 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8.06-8.01 8.06zm4.39-5.96c-.24-.12-1.41-.7-1.63-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.04-.7-.52-1.17-1.16-1.31-1.4-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.34.98 2.5c.12.16 1.7 2.6 4.12 3.6.58.24 1.03.38 1.38.49.58.18 1.11.16 1.53.1.47-.07 1.41-.58 1.61-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/>
+                </svg>
+                Let's Talk
+              </a>
+              <Link href="/work" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button className="bg-white text-black hover:bg-white/90 rounded-full w-full font-medium">
+                  Start
+                </Button>
               </Link>
-              <Button className="bg-white text-black hover:bg-white/90 rounded-full w-full font-medium">
-                Start
-              </Button>
             </div>
           </motion.div>
         )}

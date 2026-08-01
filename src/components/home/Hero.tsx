@@ -6,6 +6,7 @@ import { Points, PointMaterial } from '@react-three/drei';
 
 // @ts-ignore
 import { gsap } from 'gsap';
+import Link from 'next/link';
 import { AcfHeroSectionItem } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 
@@ -101,14 +102,18 @@ export function Hero({ heroData }: HeroProps) {
                 </p>
 
                 <div className="hero-text-element flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Button className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-base font-semibold min-w-[140px]">
-                        {heroData['button_-start']}
-                    </Button>
-                    <Button
-                        className="bg-white/10 text-white hover:bg-white/20 rounded-full px-8 py-6 text-base font-normal border border-white/20 backdrop-blur-sm min-w-[180px]"
-                    >
-                        {heroData.button_expert_}
-                    </Button>
+                    <a href="https://wa.me/94775053300" target="_blank" rel="noopener noreferrer">
+                        <Button className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-base font-semibold min-w-[140px]">
+                            {heroData['button_-start']}
+                        </Button>
+                    </a>
+                    <Link href="/work">
+                        <Button
+                            className="bg-white/10 text-white hover:bg-white/20 rounded-full px-8 py-6 text-base font-normal border border-white/20 backdrop-blur-sm min-w-[180px]"
+                        >
+                            {heroData.button_expert_}
+                        </Button>
+                    </Link>
                 </div>
             </div>
 

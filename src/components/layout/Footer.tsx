@@ -44,10 +44,10 @@ const socialMediaLinks = [
 
 const footerPageLinks = [
   { page_name: "Home", page_link: "/" },
-  { page_name: "Capabilities", page_link: "/#capabilities" },
-  { page_name: "About", page_link: "/#about" },
-  { page_name: "Work", page_link: "/#work" },
-  { page_name: "Contact", page_link: "/#contact" },
+  { page_name: "Services", page_link: "/services" },
+  { page_name: "About", page_link: "/about" },
+  { page_name: "Work", page_link: "/work" },
+  { page_name: "Contact", page_link: "/contact" },
 ];
 
 const supportLinksFallback = [
@@ -98,8 +98,9 @@ export const Footer = ({ acfData }: FooterProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
+              className="lg:-mt-2"
             >
-              <Link href="/" className="mb-2 block inline-block">
+              <Link href="/" className="mb-4 block inline-block">
                 {acfData?.footer_logo ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -109,7 +110,7 @@ export const Footer = ({ acfData }: FooterProps) => {
                         : acfData.footer_logo.url
                     }
                     alt="Footer Logo"
-                    className="h-12 md:h-16 lg:h-20 w-auto object-contain object-left"
+                    className="h-10 md:h-12 lg:h-14 w-auto object-contain object-left-top"
                   />
                 ) : (
                   <span className="text-4xl md:text-5xl font-bold tracking-tighter">
