@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { PerspectiveCamera } from '@react-three/drei';
@@ -157,6 +157,51 @@ const GravityWell = () => {
 };
 
 export const Contact3DHero = () => {
+    const [formData, setFormData] = useState({ name: '', email: '', service: '', message: '' });
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        setFormData(prev => ({ ...prev, [e.target.id]: e.target.value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        // Custom validation to ensure feedback is visible
+        if (!formData.name.trim() || !formData.email.trim() || !formData.service || !formData.message.trim()) {
+            setStatus('error');
+            setErrorMessage('Please fill in all fields before launching your message.');
+            return;
+        }
+
+        setStatus('loading');
+        setErrorMessage('');
+
+        try {
+            const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL || '';
+            const res = await fetch(`${wpUrl}wp-json/axorah/v1/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+                setStatus('success');
+                setFormData({ name: '', email: '', service: '', message: '' });
+                // Reset status after a few seconds
+                setTimeout(() => setStatus('idle'), 5000);
+            } else {
+                setStatus('error');
+                setErrorMessage(data.message || 'Something went wrong. Please try again.');
+            }
+        } catch (error) {
+            setStatus('error');
+            setErrorMessage('Failed to send message. Please try again later.');
+        }
+    };
+
     return (
         <section className="relative w-full min-h-[100vh] bg-black overflow-hidden flex items-center justify-center pt-24 pb-12">
             {/* 3D Canvas Background (Gravity Well) */}
@@ -199,12 +244,14 @@ back to you as soon as possible.
                     {/* Inner glow */}
                     <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent pointer-events-none" />
 
-                    <form className="relative z-10 flex flex-col gap-5">
+                    <form onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-5">
                         <div className="flex flex-col gap-2">
                             <label htmlFor="name" className="text-xs uppercase tracking-widest text-gray-500 font-medium ml-1">Name</label>
                             <input
                                 type="text"
                                 id="name"
+                                value={formData.name}
+                                onChange={handleChange}
                                 placeholder="Your Name"
                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all"
                             />
@@ -214,6 +261,8 @@ back to you as soon as possible.
                             <input
                                 type="email"
                                 id="email"
+                                value={formData.email}
+                                onChange={handleChange}
                                 placeholder="you@example.com"
                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all"
                             />
@@ -223,7 +272,8 @@ back to you as soon as possible.
                             <div className="relative">
                                 <select
                                     id="service"
-                                    defaultValue=""
+                                    value={formData.service}
+                                    onChange={handleChange}
                                     className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all appearance-none cursor-pointer"
                                 >
                                     <option value="" disabled className="text-gray-500 bg-zinc-900">Select a service...</option>
@@ -242,18 +292,32 @@ back to you as soon as possible.
                             <label htmlFor="message" className="text-xs uppercase tracking-widest text-gray-500 font-medium ml-1">Message</label>
                             <textarea
                                 id="message"
+                                value={formData.message}
+                                onChange={handleChange}
                                 placeholder="Tell us about your business, goals, timeline, and budget."
                                 rows={4}
                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-violet-500/50 focus:bg-white/10 transition-all resize-none"
                             ></textarea>
                         </div>
 
+                        {status === 'success' && (
+                            <div className="p-3 bg-green-500/20 border border-green-500/50 text-green-400 rounded-xl text-sm text-center">
+                                Your message has been sent successfully!
+                            </div>
+                        )}
+                        {status === 'error' && (
+                            <div className="p-3 bg-red-500/20 border border-red-500/50 text-red-400 rounded-xl text-sm text-center">
+                                {errorMessage}
+                            </div>
+                        )}
+
                         <button
-                            type="button"
-                            className="mt-2 w-full bg-white text-black font-semibold rounded-xl py-4 flex items-center justify-center gap-2 hover:bg-violet-100 transition-colors group/btn"
+                            type="submit"
+                            disabled={status === 'loading'}
+                            className="mt-2 w-full bg-white text-black font-semibold rounded-xl py-4 flex items-center justify-center gap-2 hover:bg-violet-100 transition-colors group/btn disabled:opacity-70 disabled:cursor-not-allowed"
                         >
-                            <span>Launch Message</span>
-                            <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                            <span>{status === 'loading' ? 'Sending...' : 'Launch Message'}</span>
+                            {status !== 'loading' && <span className="group-hover/btn:translate-x-1 transition-transform">→</span>}
                         </button>
 
                         <a
